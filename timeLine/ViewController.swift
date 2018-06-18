@@ -17,11 +17,13 @@ class ViewController: UIViewController, UICollectionViewDelegate,UICollectionVie
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.register(UINib(nibName: "MonthCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "MonthCollectionViewCell")
-        let allDates = Helper.generateRandomDate(daysBack: 500, numberOf: 5)
+        let allDates = Helper.generateRandomDate(daysBack: 500, numberOf: 3)
         self.dates = allDates.sorted(by: {
             $0!.compare($1!) == .orderedAscending
         })
-        print("dates",self.dates)
+        for date in self.dates{
+            print("dates",Calendar.current.component(.day, from: date!))
+        }
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
     }
@@ -43,20 +45,14 @@ class ViewController: UIViewController, UICollectionViewDelegate,UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MonthCollectionViewCell", for: indexPath) as! MonthCollectionViewCell
-        //cell.backgroundColor = UIColor.gray
-        let dayViews = cell.dayViews
+        cell.backgroundColor = UIColor.gray
         let firstDate = dates.first
         let index = indexPath.item
         let monthDate = Calendar.current.date(byAdding: .month, value: index, to: firstDate as! Date)
         let monthInt = Calendar.current.component(.month, from: monthDate!)
         let yearInt = Calendar.current.component(.year, from: monthDate!)
         let monthDates = dates(self.dates as! [Date], withinMonth: monthInt, withinYear: yearInt)
-        for date in monthDates {
-            let dayInt = date.interval(ofComponent: .day, fromDate: (monthDate?.startOfMonth())!)
-            let tick = dayViews[dayInt]
-            print(tick,"tick")
-            tick?.backgroundColor = UIColor.red
-            }
+        cell.colorViews(monthDates:monthDates)
         return cell
     }
     

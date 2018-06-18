@@ -11,14 +11,20 @@ import UIKit
 class MonthCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var stackView: UIStackView!
-    var dayViews: [Int:UIView] = [:]
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        for i in 1...30 {
+        for _ in 1...30 {
             let tick = UIView()
-            dayViews[i] = tick
             self.stackView?.addArrangedSubview(tick)
+        }
+    }
+    
+    func colorViews(monthDates: [Date]){
+        for date in monthDates {
+            let dayIndex = Calendar.current.component(.day, from: date)
+            let tick = stackView.arrangedSubviews[dayIndex - 1]
+            tick.backgroundColor = UIColor.red
         }
     }
 
