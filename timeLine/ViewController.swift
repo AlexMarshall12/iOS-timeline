@@ -22,7 +22,7 @@ class ViewController: UIViewController, UICollectionViewDelegate,UICollectionVie
             $0!.compare($1!) == .orderedAscending
         })
         for date in self.dates{
-            print("dates",Calendar.current.component(.day, from: date!))
+            print("monthd",date)
         }
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
@@ -37,7 +37,7 @@ class ViewController: UIViewController, UICollectionViewDelegate,UICollectionVie
         let last = (dates.last)!
         let months = last?.months(from: first!) ?? 0
         if let diff = last?.months(from: first!), diff <= 5 {
-            return months + 5-diff
+            return months + 5-diff + 1
         } else {
             return months + 1
         }
@@ -51,6 +51,9 @@ class ViewController: UIViewController, UICollectionViewDelegate,UICollectionVie
         let monthDate = Calendar.current.date(byAdding: .month, value: index, to: firstDate as! Date)
         let monthInt = Calendar.current.component(.month, from: monthDate!)
         let yearInt = Calendar.current.component(.year, from: monthDate!)
+        cell.monthLabel.text = String(monthInt)+" "+String(yearInt)
+        cell.year = yearInt
+        cell.month = monthInt
         let monthDates = dates(self.dates as! [Date], withinMonth: monthInt, withinYear: yearInt)
         cell.colorViews(monthDates:monthDates)
         return cell
@@ -65,7 +68,6 @@ class ViewController: UIViewController, UICollectionViewDelegate,UICollectionVie
     func dates(_ dates: [Date], withinMonth month: Int, withinYear year: Int) -> [Date] {
         let calendar = Calendar.current
         let components: Set<Calendar.Component> = [.month,.year]
-        print(components,"components")
         let filtered = dates.filter { (date) -> Bool in
             let monthAndYear = calendar.dateComponents(components, from: date)
             return (monthAndYear.month == month && monthAndYear.year == year)

@@ -22,6 +22,12 @@
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="RUC-tc-Wla">
                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                     </stackView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UB1-26-BKY">
+                        <rect key="frame" x="0.0" y="0.5" width="50" height="50"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
             </view>
             <constraints>
@@ -29,9 +35,14 @@
                 <constraint firstItem="RUC-tc-Wla" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="6RD-VQ-M8U"/>
                 <constraint firstItem="RUC-tc-Wla" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" id="MKQ-Ua-5yP"/>
                 <constraint firstItem="RUC-tc-Wla" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" id="MhT-sD-N2Z"/>
+                <constraint firstItem="UB1-26-BKY" firstAttribute="centerY" secondItem="ZTg-uK-7eu" secondAttribute="centerY" id="PWE-mG-e4F"/>
+                <constraint firstItem="UB1-26-BKY" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" id="R9P-4l-Opd"/>
+                <constraint firstItem="UB1-26-BKY" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" id="SUu-pD-ihD"/>
+                <constraint firstItem="UB1-26-BKY" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="azA-UD-yWT"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <connections>
+                <outlet property="monthLabel" destination="UB1-26-BKY" id="zip-Xu-y8a"/>
                 <outlet property="stackView" destination="RUC-tc-Wla" id="f1y-wo-P36"/>
             </connections>
         </collectionViewCell>
