@@ -17,12 +17,12 @@ class ViewController: UIViewController, UICollectionViewDelegate,UICollectionVie
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.register(UINib(nibName: "MonthCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "MonthCollectionViewCell")
-        let allDates = Helper.generateRandomDate(daysBack: 500, numberOf: 3)
+        let allDates = Helper.generateRandomDate(daysBack: 900, numberOf: 3)
         self.dates = allDates.sorted(by: {
             $0!.compare($1!) == .orderedAscending
         })
         for date in self.dates{
-            print("monthd",date)
+            print("months",date)
         }
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
@@ -37,8 +37,9 @@ class ViewController: UIViewController, UICollectionViewDelegate,UICollectionVie
         let last = (dates.last)!
         let months = last?.months(from: first!) ?? 0
         if let diff = last?.months(from: first!), diff <= 5 {
-            return months + 5-diff + 1
+            return months + 5-diff
         } else {
+            print("months",months+1)
             return months + 1
         }
     }
@@ -62,7 +63,7 @@ class ViewController: UIViewController, UICollectionViewDelegate,UICollectionVie
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.size.width/2, height: collectionView.bounds.size.height)
+        return CGSize(width: collectionView.bounds.size.width/5, height: collectionView.bounds.size.height)
     }
     
     func dates(_ dates: [Date], withinMonth month: Int, withinYear year: Int) -> [Date] {

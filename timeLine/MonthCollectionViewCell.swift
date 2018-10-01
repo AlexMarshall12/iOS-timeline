@@ -15,6 +15,13 @@ class MonthCollectionViewCell: UICollectionViewCell {
     var year: Int?
     var month: Int?
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        for each_view in stackView.subviews {
+            each_view.backgroundColor = UIColor.clear
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         for _ in 0...30 {
@@ -43,3 +50,4 @@ class MonthCollectionViewCell: UICollectionViewCell {
         }
     }
 }
+
